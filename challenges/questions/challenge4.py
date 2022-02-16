@@ -26,3 +26,4 @@ def main():
 if __name__ == "__main__":
     print("Challenge %d" % CHALLENGE)
     print()
+    main()
