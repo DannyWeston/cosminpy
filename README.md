@@ -6,4 +6,4 @@ This is a repository for managing Cosmin's progress of learning Python.
 
 [Questions](/challenges/questions)
 
-[Answers](/challenges/questions)
+[Answers](/challenges/answers)
