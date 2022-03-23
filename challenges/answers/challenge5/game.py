@@ -84,7 +84,7 @@ class Game:
 
         elif e.keysym == 'F1': # F1 key is pressed\
             self.debug = not self.debug
-            self.gui.set_debug(self.debug)
+            self.gui.show_debug_text(self.debug)
 
     def calc_difficulty(self):
         return Game.STARTING_DIFFICULTY - int(100 * math.log10(self.score + 1))
@@ -112,22 +112,7 @@ class Game:
 
         # Check for game over
         if len(self.snake) != len(set(self.snake)):
-            # Cancel the game loop
-            self.gui.cancel_loop()
-            self.gui.unbind_keypress()
-
-            # Delete all squares
-            self.gui.delete_squares()
-
-            # Hide all debug text
-            self.debug = False
-            self.gui.set_debug(False)
-
-            # Show game over label
-            self.gui.add_text(25, 25, "Game over!", "game_over_text")
-
-            # Move score text
-            self.gui.move_text("score_text", 25, 75)
+            self.game_over()
 
             return None
 
@@ -153,3 +138,21 @@ class Game:
 
         # Return the wait time depending upon the score
         return self.calc_difficulty()
+ 
+    def game_over(self):
+        # Cancel the game loop
+        self.gui.cancel_loop()
+        self.gui.unbind_keypress()
+
+        # Delete all squares
+        self.gui.delete_squares()
+
+        # Hide all debug text
+        self.debug = False
+        self.gui.show_debug_text(False)
+
+        # Show game over label
+        self.gui.add_text(25, 25, "Game over!", "game_over_text")
+
+        # Move score text
+        self.gui.move_text("score_text", 25, 75)
