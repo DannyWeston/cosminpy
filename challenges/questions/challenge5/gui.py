@@ -46,7 +46,7 @@ class GUI:
     def unbind_keypress(self):
         self.canvas.unbind("<Key>")
 
-    def set_debug(self, val):
+    def show_debug_text(self, val):
         for debug_text in self.canvas.find_withtag("debug"):
             if val: self.canvas.itemconfig(debug_text, state='normal')
             else: self.canvas.itemconfig(debug_text, state='hidden')
