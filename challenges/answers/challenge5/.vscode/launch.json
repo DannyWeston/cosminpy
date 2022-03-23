@@ -11,7 +11,7 @@
             "program": "run.py",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["16", "16"]
+            "args": ["16"]
         }
     ]
 }

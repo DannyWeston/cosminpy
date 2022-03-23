@@ -66,7 +66,8 @@ class Game:
         return [(x, 0) for x in range(0, snake_len)]
 
     def try_change_velocity(self, vel):
-        self.snake_vel = vel
+        if self.calc_next_position(self.snake[-1], vel) != self.snake[-2]:
+            self.snake_vel = vel
 
     def handle_key_press(self, e):
         if e.keysym == 'Up' or e.keysym == 'w': # Up arrow key is pressed
@@ -92,10 +93,12 @@ class Game:
     def calc_difficulty(self):
         return Game.STARTING_DIFFICULTY - int(100 * math.log10(self.score + 1))
 
+    def calc_next_position(self, pos, vel):
+        return ((pos[0] + vel[0]) % self.size, (pos[1] + vel[1]) % self.size)
+
     def update(self):
         # Update snake pos
-        head_x = (self.snake[-1][0] + self.snake_vel[0]) % self.size
-        head_y = (self.snake[-1][1] + self.snake_vel[1]) % self.size
+        (head_x, head_y) = self.calc_next_position(self.snake[-1], self.snake_vel)
 
         # Check if theres a snack there
         if self.board[head_x][head_y] == Tile["Snack"]:
@@ -134,9 +137,13 @@ class Game:
         # Clear the canvas of squares
         self.gui.delete_squares()
 
-        # Draw the snake
-        for (x, y) in self.snake:
-            self.gui.draw_square(x, y, 'green')
+        # Draw the snake head
+        (head_x, head_y) = self.snake[-1]
+        self.gui.draw_square(head_x, head_y, 'green')
+
+        # Draw the snake body
+        for (x, y) in self.snake[:-1]:
+            self.gui.draw_square(x, y, 'spring green')
         
         # Draw the snacks
         for x in range(self.size):
