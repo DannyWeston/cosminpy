@@ -2,14 +2,14 @@ from game import Game
 import sys
 
 def main(args: list):
-    if len(args) != 3:
-        print("You must provide a width and height for the program")
+    if len(args) != 2:
+        print("You must provide a size for the board!")
         return
 
     try: 
         size = int(args[1])
     except:
-        print("Width and height must be integers")
+        print("Size must be an integer")
         return
 
     # Play the game
