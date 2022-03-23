@@ -120,7 +120,12 @@ class Game:
             return None
 
         # Draw everything after being updated
+        self.draw()
 
+        # Return the wait time depending upon the score
+        return self.calc_difficulty()
+ 
+    def draw(self):
         # Update text 
         self.gui.update_text("update_text", "Updates: " + str(self.gui.updates))
         self.gui.update_text("velocity_text", "Velocity: " + str(self.snake_vel))
@@ -139,9 +144,6 @@ class Game:
                 if self.board[x][y] == Tile['Snack']:
                     self.gui.draw_square(x, y, 'red')
 
-        # Return the wait time depending upon the score
-        return self.calc_difficulty()
- 
     def game_over(self):
         # Cancel the game loop
         self.gui.cancel_loop()
