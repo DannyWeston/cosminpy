@@ -65,18 +65,21 @@ class Game:
 
         return [(x, 0) for x in range(0, snake_len)]
 
+    def try_change_velocity(self, vel):
+        self.snake_vel = vel
+
     def handle_key_press(self, e):
         if e.keysym == 'Up' or e.keysym == 'w': # Up arrow key is pressed
-            self.snake_vel = (0, -1)
+            self.try_change_velocity((0, -1))
 
         elif e.keysym == 'Down' or e.keysym == 's': # Down arrow key is pressed
-            self.snake_vel = (0, 1)
+            self.try_change_velocity((0, 1))
 
         elif e.keysym == 'Left' or e.keysym == 'a': # Left arrow key is pressed
-            self.snake_vel = (-1, 0)
+            self.try_change_velocity((-1, 0))
 
         elif e.keysym == 'Right' or e.keysym == 'd': # Right arrow key is pressed
-            self.snake_vel = (1, 0)
+            self.try_change_velocity((1, 0))
         
         elif e.keysym == 'Escape': # Right arrow key is pressed
             self.gui.window.quit()
